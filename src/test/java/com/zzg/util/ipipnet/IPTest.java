@@ -1,4 +1,4 @@
-package com.zzg.util.excel.ipipnet;
+package com.zzg.util.ipipnet;
 
 import java.util.Random;
 
