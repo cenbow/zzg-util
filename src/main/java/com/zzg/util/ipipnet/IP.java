@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.Charset;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -26,20 +25,6 @@ class IP {
         str.append(0);
 
         return str.toString();
-    }
-
-    public static void main(String[] args){
-		IP.load("/Users/zhangzhiguang/Documents/workspace_zzg/zzg-util/src/main/resources/17monipdb/17monipdb.dat");
-
-        Long st = System.nanoTime();
-        for (int i = 0; i < 1000000; i++)
-        {
-            IP.find(randomIp());
-        }
-        Long et = System.nanoTime();
-        System.out.println((et - st) / 1000 / 1000);
-
-        System.out.println(Arrays.toString(IP.find("118.28.8.8")));
     }
 
     public static boolean enableFileWatch = false;
@@ -103,6 +88,34 @@ class IP {
 
         return new String(areaBytes, Charset.forName("UTF-8")).split("\t", -1);
     }
+
+	/**
+	 * 解析IP成 国家 省份 城市
+	 * 如果IP地址非法，或者IP地址未找到位置返回的是一个[国家 省份 城市]都为空的对象
+	 * @author zhang_zg
+	 * @param ip
+	 * @return
+	 */
+	public static IPEntity findIp(String ip) {
+		IPEntity ipEntity = new IPEntity();
+		try {
+			String[] array = find(ip);
+
+			int len = array.length;
+			if (len > 0) {
+				ipEntity.setCounty(array[0]);
+			}
+			if (len > 1) {
+				ipEntity.setProvinces(array[1]);
+			}
+			if (len > 2) {
+				ipEntity.setProvinces(array[2]);
+			}
+		} catch (Exception e) {
+		}
+
+		return ipEntity;
+	}
 
     private static void watch() {
         Executors.newScheduledThreadPool(1).scheduleAtFixedRate(new Runnable() {

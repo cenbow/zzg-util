@@ -4,15 +4,16 @@ import java.util.Random;
 
 public class IPTest {
 	public static void main(String[] args) {
+		IP.load("/Users/zhangzhiguang/Documents/workspace_zzg/zzg-util/src/main/resources/17monipdb/17monipdb.dat");
 
 		Long st = System.currentTimeMillis();
 		for (int i = 0; i < 1000000; i++) {
-			IPUtil.parseIP(randomIp());
+			IP.findIp(randomIp());
 		}
 		Long et = System.currentTimeMillis();
 		System.out.println((et - st));
 
-		System.out.println(IPUtil.parseIP("-1001.223.223.1").toString());
+		System.out.println(IP.findIp("-1001.223.223.1").toString());
 
 	}
 
