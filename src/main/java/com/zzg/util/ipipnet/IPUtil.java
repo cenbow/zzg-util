@@ -1,7 +1,11 @@
 package com.zzg.util.ipipnet;
 
-
-
+/**
+ * 单例的IP工具类
+ * @author zhang_zg 
+ * @version 1.0    
+ * @created 2016年3月15日 下午5:38:46
+ */
 public class IPUtil {
 
 	private static IPUtil currentIPUtil = new IPUtil();
