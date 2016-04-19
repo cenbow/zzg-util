@@ -3,7 +3,7 @@ package com.zzg.util.math;
 import java.util.Random;
 
 /**
- * 高斯分布的随机红包
+ * 高斯分布的随机红包:红包金额尽量集中在平均值
  * @author zhang_zg 
  * @version 1.0    
  * @created 2016年4月19日 上午10:38:02
@@ -43,10 +43,10 @@ public class RedpackRand {
 			int temp = 0;
 			if (random(min, max) > avg) {
 				// 随机数>平均值，则产生小红包
-				temp = min + xRandom(min, avg);
+				temp = min + gRandom(min, avg);
 			} else {
 				// 否则, 产生大红包
-				temp = max - xRandom(avg, max);
+				temp = max - gRandom(avg, max);
 			}
 			result[i] = temp;
 			amount -= temp;
@@ -80,24 +80,30 @@ public class RedpackRand {
 	}
 
 	/**
-	 * 高斯分布处理:先平方再开方，尽量将产生的随机数靠近min
+	 * 高斯分布处理随机数
 	 * @param min
 	 * @param max
 	 * @return
 	 */
-	private static int xRandom(int min, int max) {
-		return (int) Math.sqrt(random.nextInt((int) Math.pow(max - min, 2) + 1));
+	private static int gRandom(int min, int max) {
+		double g = 0;
+		for (;;) {
+			g = Math.abs(random.nextGaussian()); // 取绝对值
+			if (g <= 1)
+				break;
+		}
+		return (int) ((max - min) * (1 - g));
 	}
 
 	public static void main(String[] args) {
 		for (int i = 0; i <= 10; i++) {
-			int[] array = RedpackRand.random(104, 5, 50, 1);
+			int[] array = RedpackRand.random(104, 10, 30, 1);
 			int sum = 0;
 			for (int j : array) {
 				sum += j;
 				System.out.print(j + ", ");
 			}
-			System.out.println("[avg = " + 104 / 5 + ",sum = " + sum + "]");
+			System.out.println("[avg = " + 104 / 10 + ",sum = " + sum + "]");
 		}
 	}
 }
