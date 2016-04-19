@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+	<property name="BASE_PATH" value="/Users/zhangzhiguang/Documents/logs/zzg" />
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<Encoding>UTF-8</Encoding>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d %-5level [%thread] %C[%M %L]- %msg%n</pattern>
+		</layout>
+	</appender>
+	
+	<root level="DEBUG">
+		<appender-ref ref="STDOUT"/>
+	</root>
+	
+</configuration>  
