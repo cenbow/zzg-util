@@ -41,10 +41,11 @@ public class RedpackRand {
 		
 		for (int i = 0; i < total; i++) {
 			int temp = 0;
-			// 随机数>平均值，则产生小红包
 			if (random(min, max) > avg) {
+				// 随机数>平均值，则产生小红包
 				temp = min + xRandom(min, avg);
 			} else {
+				// 否则, 产生大红包
 				temp = max - xRandom(avg, max);
 			}
 			result[i] = temp;
@@ -79,7 +80,7 @@ public class RedpackRand {
 	}
 
 	/**
-	 * 高斯分布处理:先平方再开放，尽量将产生的随机数靠近min
+	 * 高斯分布处理:先平方再开方，尽量将产生的随机数靠近min
 	 * @param min
 	 * @param max
 	 * @return
