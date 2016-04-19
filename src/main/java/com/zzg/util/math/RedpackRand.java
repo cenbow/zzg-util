@@ -94,15 +94,19 @@ public class RedpackRand {
 	}
 
 	public static void main(String[] args) {
+		int amount = 104;
+		int total = 8;
+		int max = 30;
+		int min = 1;
 		for (int i = 0; i <= 100; i++) {
 
-			int[] array = RedpackRand.random(104, 8, 30, 1);
+			int[] array = RedpackRand.random(amount, total, max, min);
 			int sum = 0;
 			for (int j : array) {
 				sum += j;
 				System.out.print(j + ", ");
 			}
-			System.out.println("[avg = " + 104 / 14 + ",sum = " + sum + "]");
+			System.out.println("[avg = " + amount / total + ",sum = " + sum + "]");
 		}
 	}
 }
