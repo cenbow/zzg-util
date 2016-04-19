@@ -98,8 +98,8 @@ public class RedpackRand {
 		int total = 8;
 		int max = 30;
 		int min = 1;
-		for (int i = 0; i <= 100; i++) {
 
+		for (int i = 0; i <= 100; i++) {
 			int[] array = RedpackRand.random(amount, total, max, min);
 			int sum = 0;
 			for (int j : array) {
