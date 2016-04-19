@@ -90,7 +90,7 @@ public class RedpackRand {
 			if (g <= 1)
 				break;
 		}
-		return (int) ((max - min) * g);
+		return (int) ((max - min) * (1 - g));
 	}
 
 	public static void main(String[] args) {
