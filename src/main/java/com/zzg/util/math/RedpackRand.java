@@ -41,12 +41,10 @@ public class RedpackRand {
 		
 		for (int i = 0; i < total; i++) {
 			int temp = 0;
-			if (random(min, max) > avg) {
-				// 随机数>平均值，则产生小红包
+			if (random(min, max) > avg) { // 随机数>平均值，则产生小红包
 				temp = min + gRandom(min, avg);
 			} else {
-				// 否则, 产生大红包
-				temp = max - gRandom(avg, max);
+				temp = max - gRandom(avg, max); // 否则, 产生大红包
 			}
 			result[i] = temp;
 			amount -= temp;
@@ -92,18 +90,19 @@ public class RedpackRand {
 			if (g <= 1)
 				break;
 		}
-		return (int) ((max - min) * (1 - g));
+		return (int) ((max - min) * g);
 	}
 
 	public static void main(String[] args) {
-		for (int i = 0; i <= 10; i++) {
-			int[] array = RedpackRand.random(104, 10, 30, 1);
+		for (int i = 0; i <= 100; i++) {
+
+			int[] array = RedpackRand.random(104, 8, 30, 1);
 			int sum = 0;
 			for (int j : array) {
 				sum += j;
 				System.out.print(j + ", ");
 			}
-			System.out.println("[avg = " + 104 / 10 + ",sum = " + sum + "]");
+			System.out.println("[avg = " + 104 / 14 + ",sum = " + sum + "]");
 		}
 	}
 }
