@@ -44,7 +44,6 @@ public class FTL {
 	/**
 	 * 初始化模板入口
 	 * @author zhang_zg
-	 * @param tplDir 模板文件夹
 	 */
 	public static void load() {
 		String tplDir = FTL.class.getClassLoader().getResource("/").getPath() + TEMPLATE_DIR_NAME;
