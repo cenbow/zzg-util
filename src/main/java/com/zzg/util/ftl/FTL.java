@@ -1,6 +1,7 @@
 package com.zzg.util.ftl;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.ArrayList;
@@ -133,10 +134,14 @@ public class FTL {
 		try {
 			template.process(data, out);
 			outString = out.toString();
-			out.close();
 		} catch (Exception ex) {
 			LOG.error("template of '{}' render error!", tplPath, ex);
 			throw new RuntimeException(ex);
+		} finally {
+			try {
+				out.close();
+			} catch (IOException ex) {
+			}
 		}
 
 		return outString;
