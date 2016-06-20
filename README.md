@@ -15,3 +15,5 @@
 7.RedpackRand符合高斯分布的随机红包生成工具。
 
 8.Arith精度计算工具类。
+
+9.FreeMarker模板处理工具类。
