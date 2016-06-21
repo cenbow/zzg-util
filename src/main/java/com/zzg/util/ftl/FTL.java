@@ -18,7 +18,6 @@ import freemarker.template.TemplateExceptionHandler;
 
 /**
  * FreeMarker模板处理工具类
- * 功能：模板加载到内存，并且可定期更新 
  * @author zhang_zg 
  * @version 1.0    
  * @created 2016年6月16日 下午6:20:36
