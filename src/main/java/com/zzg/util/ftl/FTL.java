@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,12 +26,7 @@ import freemarker.template.TemplateExceptionHandler;
 public class FTL {
 	private static final Logger LOG = LoggerFactory.getLogger(FTL.class);
 
-	private static final String TEMPLATE_DIR_NAME = "template"; // 模板文件夹名称
-
-	private static boolean enableFileWatch = true; // 是否开启自动更新
-
-	private static long watchPeriod = 5000L; // 监控周期
-	private static long lastModifyTime = 0L;
+	private static final String TEMPLATE_DIR_NAME = "template";
 	private static File ftlFiles;
 	private static String templateDir;
 	private static List<File> fileList = new ArrayList<File>();
@@ -60,23 +53,6 @@ public class FTL {
 		}
 
 		doLoad();
-		if (enableFileWatch) {
-			watch();
-		}
-	}
-
-	private static void watch() {
-		Executors.newScheduledThreadPool(1).scheduleAtFixedRate(new Runnable() {
-			@Override
-			public void run() {
-				long time = ftlFiles.lastModified();
-				System.out.println("time:" + time);
-				if (time > lastModifyTime) {
-					lastModifyTime = time;
-					doLoad();
-				}
-			}
-		}, 1000L, watchPeriod, TimeUnit.MILLISECONDS);
 	}
 
 	/**
@@ -140,6 +116,8 @@ public class FTL {
 			try {
 				out.close();
 			} catch (IOException ex) {
+				LOG.error("StringWriter close error", ex);
+				throw new RuntimeException(ex);
 			}
 		}
 
