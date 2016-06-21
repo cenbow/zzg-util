@@ -103,8 +103,13 @@ public class FTL {
 	 * @param data 需要渲染的数据
 	 */
 	public static String format(String tplPath, Map<String, Object> data) {
+		if (!TEMPLATES.containsKey(tplPath)) {
+			throw new IllegalArgumentException(tplPath + " not found!");
+		}
+
 		String outString = null;
 		Template template = TEMPLATES.get(tplPath);
+
 		Writer out = new StringWriter();
 		try {
 			template.process(data, out);
