@@ -1,7 +1,14 @@
 package com.zzg.util.web.action;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.nutz.dao.entity.Record;
 import org.nutz.ioc.loader.annotation.IocBean;
@@ -10,6 +17,7 @@ import org.nutz.mvc.Mvcs;
 import org.nutz.mvc.annotation.At;
 import org.nutz.mvc.annotation.Ok;
 
+import com.zzg.util.excel.ExcelUtil;
 import com.zzg.util.ftl.FTL;
 import com.zzg.util.token.Token;
 
@@ -17,6 +25,21 @@ import com.zzg.util.token.Token;
 @IocBean
 public class TokenTestAction {
 	
+	@At("/download")
+	public void download(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String[] headers = { "a", "b", "c" };
+		Collection<Object> dataset = new ArrayList<Object>();
+
+		//设置response头信息  
+		response.reset();
+		response.setContentType("application/msexcel");// 定义输出类型 
+		response.setHeader("Content-disposition", "attachment; filename=" + "excel" + ".xls");
+		OutputStream out = response.getOutputStream();
+		ExcelUtil.exportExcel(headers, dataset, out);
+		out.flush();
+		out.close();
+	}
+
 	@At("/to_submit")
 	@Ok("jsp:/WEB-INF/jsp/token/token.jsp")
 	public void toSubmit(String id) {
