@@ -48,7 +48,7 @@
 		<dependency>
 			<groupId>org.nutz</groupId>
 			<artifactId>nutz</artifactId>
-			<version>1.b.50</version>
+			<version>1.r.56</version>
 		</dependency>
 
 		<dependency>
@@ -111,6 +111,16 @@
 			<groupId>com.hankcs</groupId>
 			<artifactId>hanlp</artifactId>
 			<version>portable-1.2.10</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apdplat</groupId>
+			<artifactId>deep-qa</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.2</version>
 		</dependency>
 	</dependencies>
 	<build>

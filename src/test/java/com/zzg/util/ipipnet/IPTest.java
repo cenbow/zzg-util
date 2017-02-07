@@ -1,21 +1,33 @@
 package com.zzg.util.ipipnet;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.Random;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class IPTest {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		IP.load("/Users/zhangzhiguang/Documents/workspace_zzg/zzg-util/src/main/resources/17monipdb/17monipdb.dat");
 
-		Long st = System.currentTimeMillis();
-		for (int i = 0; i < 1000000; i++) {
-			IP.findIp(randomIp());
-		}
-		Long et = System.currentTimeMillis();
-		System.out.println((et - st));
+		String path = "/Users/zhangzhiguang/Desktop/ip.txt";
 
-		System.out.println(IP.findIp("-1001.223.223.1").toString());
+		BufferedReader br = new BufferedReader(new FileReader(path));
+		String line = null;
+		while ((line = br.readLine()) != null) {
+			String[] loc = IP.find(line);
+			String province = loc[1];
+			String city = loc[2];
+			if (StringUtils.isBlank(city)) {
+				city = province;
+			}
+			System.out.println(province + "|" + city);
+
+		}
+		br.close();
 
 	}
+
 
 	public static String randomIp() {
 		Random r = new Random();
